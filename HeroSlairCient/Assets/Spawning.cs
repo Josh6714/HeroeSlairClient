@@ -27,13 +27,10 @@ public class Spawning : MonoBehaviour
     {
         if (msgSender.spawn == true)
         {
-            LocationToVectors();
-            TagsToObjects();
-            ranOnce = true;
         }
     }
 
-    void LocationToVectors()
+    public void LocationToVectors()
     {
         foreach (string vectorX in msgSender.VectorsX)
         {
@@ -50,7 +47,6 @@ public class Spawning : MonoBehaviour
     }
     void TagsToObjects()
     {
-        Instantiate(metalWall, transform.position, transform.rotation);
         for (int i = 0; i < msgSender.Tags.Count; i++)
         {
             switch (msgSender.Tags[i])

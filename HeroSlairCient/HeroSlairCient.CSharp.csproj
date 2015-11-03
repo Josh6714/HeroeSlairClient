@@ -68,8 +68,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="HeroSlairCient.CSharp.Plugins.csproj">
+      <Project>{D90B877C-3899-18C5-4DC2-B180BC988F04}</Project>
+      <Name>HeroSlairCient.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Assets\DoorEnter.cs" />
     <Compile Include="Assets\LevelMessage.cs" />
+    <Compile Include="Assets\LevelObject.cs" />
     <Compile Include="Assets\MessageSender.cs" />
     <Compile Include="Assets\NetManager.cs" />
     <Compile Include="Assets\Spawning.cs" />

@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using LgOctEngine.CoreClasses;
 public class MessageSender : NetworkBehaviour
 {
 	const short clientMsgType = 1002;
@@ -19,6 +20,7 @@ public class MessageSender : NetworkBehaviour
 
     const short spawnMsgType = 1011;
     public const short doneMsgType = 1012;
+    const short levelMsgType = 1013;
     public short MsgType;
 
 	public NetworkManager myManager;
@@ -35,7 +37,8 @@ public class MessageSender : NetworkBehaviour
     public List<string> ScaleZ = new List<string>();
 
     public bool spawn = false;
-
+    public static NetworkMessage levelMessage;
+    LevelObject.SendLevel potato = new LevelObject.SendLevel();
 	public void Start()
 	{
 		Init(myManager.client);
@@ -57,6 +60,7 @@ public class MessageSender : NetworkBehaviour
         NetworkServer.RegisterHandler(scaleZMsgType, OnServerReadyToBeginMessage);
         NetworkServer.RegisterHandler(spawnMsgType, OnServerReadyToBeginMessage);
         NetworkServer.RegisterHandler(doneMsgType, OnServerReadyToBeginMessage);
+        NetworkServer.RegisterHandler(levelMsgType, OnServerReadyToBeginMessage);
 
         myClient.RegisterHandler(clientMsgType, OnServerReadyToBeginMessage);
         myClient.RegisterHandler(serverMsgType, OnServerReadyToBeginMessage);
@@ -69,6 +73,7 @@ public class MessageSender : NetworkBehaviour
         myClient.RegisterHandler(scaleZMsgType, OnServerReadyToBeginMessage);
         myClient.RegisterHandler(spawnMsgType, OnServerReadyToBeginMessage);
         myClient.RegisterHandler(doneMsgType, OnServerReadyToBeginMessage);
+        myClient.RegisterHandler(levelMsgType, OnServerReadyToBeginMessage);
 
         Debug.Log("Method Called");
 	}
@@ -131,6 +136,13 @@ public class MessageSender : NetworkBehaviour
             //Debug.Log("Received Vector: " + beginMessage.message);
             ScaleZ.Add(beginMessage.message);
         }
+            
+        else if(netMsg.msgType == levelMsgType)
+        {
+            var beginMessage = netMsg.ReadMessage<LevelMessage>();
+            potato.SimpleArrayTest(beginMessage.message);
+            Debug.Log(beginMessage.message);
+        }
 
         else if(netMsg.msgType == spawnMsgType)
         {
@@ -138,7 +150,7 @@ public class MessageSender : NetworkBehaviour
             Debug.Log("Received Spawn: " + beginMessage.message);
             if(beginMessage.message == "true")
             {
-                spawn = true;
+                //spawn = true;
             }
         }
         else
