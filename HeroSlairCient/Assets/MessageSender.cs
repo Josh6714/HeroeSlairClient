@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using LgOctEngine.CoreClasses;
-public class MessageSender : NetworkBehaviour
+public class MessageSender : MonoBehaviour
 {
 	const short clientMsgType = 1002;
     const short serverMsgType = 1003;
@@ -137,7 +137,7 @@ public class MessageSender : NetworkBehaviour
             ScaleZ.Add(beginMessage.message);
         }
             
-        else if(netMsg.msgType == levelMsgType)
+        else if(netMsg.msgType == serverMsgType)
         {
             var beginMessage = netMsg.ReadMessage<LevelMessage>();
             potato.SimpleArrayTest(beginMessage.message);

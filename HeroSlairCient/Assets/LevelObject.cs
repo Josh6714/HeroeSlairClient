@@ -115,32 +115,6 @@ public class LevelObject : MonoBehaviour
         public void SimpleArrayTest(String tomato)
         {
             Level simpleArrayClass = LgJsonNode.Create<Level>();
-            //for (int i = 0; i < Manager.listOfObjects.Count; i++)
-            //{
-            //    // Method #1 - Directly add the type to array
-            //    LevelObject levelObject = CreateLevelObject();
-            //    simpleArrayClass.LevelObjectArray.Add(levelObject);
-            //}
-            //for (int i = 0; i < Manager.listOfObjects.Count; i++)
-            //{
-            // Method #2 - Use the array to add an entry and THEN fill it out
-            //LevelObject levelObject = simpleArrayClass.LevelObjectArray.AddNew();
-            //levelObject.id = "PrefabName";
-            //levelObject.row = i;
-            //levelObject.column = i * 2;
-            //levelObject.rotation = 90;
-            //levelObject.status = 0;
-            // No need to 'save' it, we are writing directly to it
-
-            //LevelObject levelObject = simpleArrayClass.LevelObjectArray.AddNew();
-            //levelObject.id = Manager.listOfObjects[i].tag;
-            //levelObject.row = Manager.listOfObjects[i].transform.position.x;
-            //levelObject.column = Manager.listOfObjects[i].transform.position.y;
-            //levelObject.rotation = 0;
-            //levelObject.status = 0;
-            //}
-            // Serialize it
-            //string serialized = simpleArrayClass.Serialize();
             string serialized = tomato;
             // Deserialize it
             Level simpleArrayClassDeserialized = LgJsonNode.CreateFromJsonString<Level>(serialized);

@@ -8,6 +8,7 @@ public class NetManager : NetworkManager {
 	int connectionId = -1;
 	const short clientMsgType = 1002;
 	const short serverMsgType = 1003;
+    NetworkClient myClient;
 
     public void Start()
     {
@@ -50,12 +51,21 @@ public class NetManager : NetworkManager {
     {
         //Network.Connect("localhost", 4444);
         StartClient();
+        myClient = client;
+        //myClient = new NetworkClient();
+        //myClient.RegisterHandler(MsgType.Connect, OnConnected);
+        //myClient.Connect("localhost", 7777);
     }
 
     public override void OnClientConnect(NetworkConnection conn)
     {
         base.OnClientConnect(conn);
         Debug.Log("Actually Connected blah");
+
+    }
+
+    public void OnConnected()
+    {
 
     }
     //when connected to server
