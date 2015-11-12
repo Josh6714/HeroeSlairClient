@@ -42,9 +42,7 @@ public class playerMovement : MonoBehaviour
     {
         if(col.gameObject.tag == "DoorExit")
         {
-            //exit = true;
-            GameObject.FindObjectOfType<MessageSender>().MsgType = 1012;
-            GameObject.FindObjectOfType<MessageSender>().SendReadyToBeginMessage(0);
+
         }
     }
 }

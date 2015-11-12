@@ -80,14 +80,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DoorEnter.cs" />
-    <Compile Include="Assets\LevelMessage.cs" />
-    <Compile Include="Assets\LevelObject.cs" />
-    <Compile Include="Assets\MessageSender.cs" />
-    <Compile Include="Assets\NetManager.cs" />
-    <Compile Include="Assets\Spawning.cs" />
-    <Compile Include="Assets\inherit.cs" />
-    <Compile Include="Assets\playerMovement.cs" />
+    <Compile Include="Assets\Scripts\DoorEnter.cs" />
+    <Compile Include="Assets\Scripts\LevelMessage.cs" />
+    <Compile Include="Assets\Scripts\MessageManager.cs" />
+    <Compile Include="Assets\Scripts\NetManager.cs" />
+    <Compile Include="Assets\Scripts\inherit.cs" />
+    <Compile Include="Assets\Scripts\playerMovement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
