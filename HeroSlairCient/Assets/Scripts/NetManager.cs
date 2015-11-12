@@ -16,11 +16,11 @@ public class NetManager : NetworkManager {
 	public void Start()
     {
         Debug.Log("NetManager:Start()");
-        StartClient();
-        myClient = client;
 
         ipAdress.text = networkAddress;
         portNumber.text = networkPort.ToString();
+        username.text = "username";
+        password.text = "password";
     }
 
 	public void OnClientSendLevel(int myId)
@@ -41,8 +41,13 @@ public class NetManager : NetworkManager {
 		myClient.Send(MessageType.LEVEL_MSG, msg);
 	}
 
+    public void Connect()
+    {
+        StartClient();
+        myClient = client;
+    }
 	public void OnClientSendLogin(int myId)
-	{
+    {
 		Debug.Log("Sending Login");
 		var msg = new JsonMessage<Login>();
         networkAddress = ipAdress.text;
@@ -51,13 +56,9 @@ public class NetManager : NetworkManager {
 		// Take the level, serialize it and store in the message
 		Login login = LgJsonNode.Create<Login>();
 		login.username = username.text;
-		login.password = password.text;
-        myClient = client;
-
+        login.password = password.text;
 		msg.message = login.Serialize();
         myClient.Send(MessageType.LOGIN_MSG, msg);
-        myClient.RegisterHandler(MessageType.LEVEL_MSG, OnClientReceiveMessage<Level>);
-        myClient.RegisterHandler(MessageType.LOGIN_ACK, OnClientReceiveMessage<Acknowledgement>);
 	}
 
 	void OnClientReceiveMessage<T>(NetworkMessage netMsg) where T : LgJsonDictionary, IJsonable, new()
@@ -76,4 +77,16 @@ public class NetManager : NetworkManager {
 			myClient.Disconnect();
 		}
 	}
+    public override void OnClientConnect(NetworkConnection conn)
+    {
+        base.OnClientConnect(conn);
+        myClient.RegisterHandler(MessageType.LEVEL_MSG, OnClientReceiveMessage<Level>);
+        myClient.RegisterHandler(MessageType.LOGIN_ACK, OnClientReceiveMessage<Acknowledgement>);
+        OnClientSendLogin(0);
+        Debug.Log("Connected");
+    }
+    public override void OnClientDisconnect(NetworkConnection conn)
+    {
+        base.OnClientDisconnect(conn);
+    }
 }

@@ -28,9 +28,41 @@ NetManager:Start()
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
 
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2ccc -> priority: 1 
-  Thread -> id: 484c -> priority: 1 
-Log: cannot connect after 10 attempt address {::ffff:127.0.0.1:7777}
+  Thread -> id: 3a48 -> priority: 1 
+  Thread -> id: 2ec4 -> priority: 1 
+Sending Login
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+network Address: 192.232.168.66 port: 7777
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Connected
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Spawn scene object not found for 1
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+OnClientReceiveMessage: Received Message {"ack":1}
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Handling Acknowledgement
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Login is Good
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)
+
+Log: connection {1} has been disconnected by timeout; address {::ffff:192.232.168.66:7777}
+aissp: time {29004} lastRecTime {26505} DisTme {2000}, rtt {52} 
+ 
+(Filename:  Line: 1848)
+
 UNet Client Disconnect Error: Timeout
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 64)

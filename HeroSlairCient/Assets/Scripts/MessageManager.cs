@@ -80,5 +80,14 @@ public class Acknowledgement : LgJsonDictionary, IJsonable
 	{
 		Debug.Log("Handling Acknowledgement");
 		// TODO: put code that does something with this object
+        if(ack == 1)
+        {
+            Debug.Log("Login is Good");
+            Application.LoadLevel(1);
+        }
+        else if(ack == 0)
+        {
+            Debug.Log("Login is no Bueno");
+        }
 	}
 }
