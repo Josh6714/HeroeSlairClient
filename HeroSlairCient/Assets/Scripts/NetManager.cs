@@ -81,7 +81,7 @@ public class NetManager : NetworkManager {
     {
         base.OnClientConnect(conn);
         myClient.RegisterHandler(MessageType.LEVEL_MSG, OnClientReceiveMessage<Level>);
-        myClient.RegisterHandler(MessageType.LOGIN_ACK, OnClientReceiveMessage<Acknowledgement>);
+        myClient.RegisterHandler(MessageType.ACKNOWLEDGE, OnClientReceiveMessage<Acknowledgement>);
         OnClientSendLogin(0);
         Debug.Log("Connected");
     }
