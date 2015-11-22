@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 using LgOctEngine.CoreClasses;
+using UnityEngine.UI;
 
 // Types of messages that can be passed
 public static class MessageType
@@ -152,6 +153,25 @@ public class Level : LgJsonDictionary, IJsonable
 // A list of levelMetaData objects to be displayed to user
 public class LevelMetaDataList : LgJsonDictionary, IJsonable
 {
+    public GameObject BuildLevellist(string title, string author, string time, string player, string rating)
+    {
+        GameObject blah = GameObject.Instantiate(Resources.Load("Content") as GameObject);
+        blah.transform.parent = GameObject.Find("Viewport").transform;
+        Text showName = blah.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
+        Text showAuthor = blah.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
+        Text showTime = blah.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
+        Text showPlayer = blah.gameObject.transform.GetChild(3).gameObject.GetComponent<Text>();
+        Text showRating = blah.gameObject.transform.GetChild(4).gameObject.GetComponent<Text>();
+
+        showName.text = title;
+        showAuthor.text = author;
+        showTime.text = time;
+        showPlayer.text = player;
+        showRating.text = rating;
+
+        return blah;
+
+    }
 	public LgJsonArray<LevelMetaData> LevelMetaDataArray
 	{
 		get { return GetNode<LgJsonArray<LevelMetaData>>("LevelMetaDataList"); }
@@ -162,6 +182,11 @@ public class LevelMetaDataList : LgJsonDictionary, IJsonable
 	{
 		Debug.Log("Handling Level");
 		// TODO: put code that does something with this object
+
+        for (int i = 0; i < LevelMetaDataArray.Count; i++)
+        {
+            BuildLevellist(LevelMetaDataArray[i].title, LevelMetaDataArray[i].author, LevelMetaDataArray[i].time.ToString(), LevelMetaDataArray[i].player, LevelMetaDataArray[i].rating.ToString());
+        }
 	}
 }
 
@@ -256,4 +281,6 @@ public class Player : LgJsonDictionary, IJsonable
 		Debug.Log("Handling Player");
 		// TODO: put code that does something with this object
 	}
+
+   
 }
