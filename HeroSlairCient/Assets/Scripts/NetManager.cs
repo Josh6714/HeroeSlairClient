@@ -61,6 +61,12 @@ public class NetManager : NetworkManager {
         myClient.Send(MessageType.LOGIN_MSG, msg);
 	}
 
+    public void AskForLevels(int myId)
+    {
+        Debug.Log("Asking for level list");
+        var msg = new JsonMessage<LevelMessage>();
+    }
+
 	void OnClientReceiveMessage<T>(NetworkMessage netMsg) where T : LgJsonDictionary, IJsonable, new()
 	{
 		JsonMessage<T> jsonMessage = netMsg.ReadMessage<JsonMessage<T>>();
