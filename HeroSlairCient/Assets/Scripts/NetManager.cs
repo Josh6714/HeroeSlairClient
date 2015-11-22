@@ -17,10 +17,10 @@ public class NetManager : NetworkManager {
     {
         Debug.Log("NetManager:Start()");
 
-        ipAdress.text = networkAddress;
-        portNumber.text = networkPort.ToString();
-        username.text = "username";
-        password.text = "password";
+        //ipAdress.text = networkAddress;
+        //portNumber.text = networkPort.ToString();
+        //username.text = "username";
+        //password.text = "password";
     }
 
 	public void OnClientSendLevel(int myId)
@@ -43,6 +43,8 @@ public class NetManager : NetworkManager {
 
     public void Connect()
     {
+        networkAddress = ipAdress.text;
+        networkPort = int.Parse(portNumber.text);
         StartClient();
         myClient = client;
     }
@@ -50,8 +52,6 @@ public class NetManager : NetworkManager {
     {
 		Debug.Log("Sending Login");
 		var msg = new JsonMessage<Login>();
-        networkAddress = ipAdress.text;
-        networkPort = int.Parse(portNumber.text);
         Debug.Log("network Address: " + networkAddress + " port: " + networkPort);
 		// Take the level, serialize it and store in the message
 		Login login = LgJsonNode.Create<Login>();
@@ -74,7 +74,8 @@ public class NetManager : NetworkManager {
 		if (myClient.isConnected) 
 		{
 			Debug.Log ("Disconnecting");
-			myClient.Disconnect();
+            myClient.Disconnect();
+            Destroy(gameObject);
 		}
 	}
     public override void OnClientConnect(NetworkConnection conn)
@@ -88,5 +89,13 @@ public class NetManager : NetworkManager {
     public override void OnClientDisconnect(NetworkConnection conn)
     {
         base.OnClientDisconnect(conn);
+        Debug.Log("Disconnected");
+    }
+    void OnDestroy()
+    {
+        if (Application.loadedLevel != 0)
+        {
+            Application.LoadLevel(0);
+        }
     }
 }
