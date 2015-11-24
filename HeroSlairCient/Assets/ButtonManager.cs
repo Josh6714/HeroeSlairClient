@@ -6,6 +6,7 @@ public class ButtonManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         manager = GameObject.Find("NetManager").GetComponent<NetManager>();
+        manager.AskForLevels(0);
 	}
 	
 	// Update is called once per frame
@@ -21,6 +22,11 @@ public class ButtonManager : MonoBehaviour {
 
     public void OnClickPlay()
     {
-        manager.AskForLevels(0);
+        manager.OnClientReceiveLevel(0);
+    }
+
+    public void OnClickTitle()
+    {
+        Debug.Log("YUP");
     }
 }

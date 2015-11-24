@@ -41,6 +41,16 @@ public class NetManager : NetworkManager {
 		myClient.Send(MessageType.LEVEL_MSG, msg);
 	}
 
+    public void OnClientReceiveLevel(int myId)
+    {
+        Debug.Log("Asking for level download");
+        var msg = new JsonMessage<Request>();
+        Request req = LgJsonNode.Create<Request>();
+        req.request = "testLevel";
+        msg.message = req.Serialize();
+        myClient.Send(MessageType.REQUEST_LEVEL, msg);
+    }
+
     public void Connect()
     {
         networkAddress = ipAdress.text;
@@ -68,7 +78,7 @@ public class NetManager : NetworkManager {
         Debug.Log("Asking for level list");
         var msg = new JsonMessage<Request>();
         Request req = LgJsonNode.Create<Request>();
-        req.request = MessageType.REQUEST_LIST.ToString();
+        req.request = "LevelList";
         msg.message = req.Serialize();
         myClient.Send(MessageType.REQUEST_LIST, msg);
        
@@ -97,6 +107,8 @@ public class NetManager : NetworkManager {
         myClient.RegisterHandler(MessageType.LEVEL_MSG, OnClientReceiveMessage<Level>);
         myClient.RegisterHandler(MessageType.ACKNOWLEDGE, OnClientReceiveMessage<Acknowledgement>);
         myClient.RegisterHandler(MessageType.PLAYER, OnClientReceiveMessage<Player>);
+        myClient.RegisterHandler(MessageType.LEVEL_LIST, OnClientReceiveMessage<LevelMetaDataList>);
+        myClient.RegisterHandler(MessageType.LEVEL_MSG, OnClientReceiveMessage<Level>);
         OnClientSendLogin(0);
         Debug.Log("Connected");
     }

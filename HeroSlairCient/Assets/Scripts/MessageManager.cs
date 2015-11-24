@@ -150,6 +150,29 @@ public class Level : LgJsonDictionary, IJsonable
 	{
 		Debug.Log("Handling Level");
 		// TODO: put code that does something with this object
+
+        for (int i = 0; i < LevelObjectArray.Count; i++ )
+        {
+            switch(LevelObjectArray[i].id)
+            {
+            case "MetalWall":
+                   GameObject.Instantiate(Resources.Load("metalWall"), new Vector3(LevelObjectArray[i].row, LevelObjectArray[i].column, 0), Quaternion.Euler(0,0, LevelObjectArray[i].rotation));
+                    break;
+            case "Battery":
+                    GameObject.Instantiate(Resources.Load("Battery"), new Vector3(LevelObjectArray[i].row, LevelObjectArray[i].column, 0), Quaternion.Euler(0, 0, LevelObjectArray[i].rotation));
+                    break;
+            case "WoodenCrate":
+                    GameObject.Instantiate(Resources.Load("WoodenCrate"), new Vector3(LevelObjectArray[i].row, LevelObjectArray[i].column, 0), Quaternion.Euler(0, 0, LevelObjectArray[i].rotation));
+                    break;
+            case "DoorEnter":
+                    GameObject.Instantiate(Resources.Load("DoorEnter"), new Vector3(LevelObjectArray[i].row, LevelObjectArray[i].column, 0), Quaternion.Euler(0, 0, LevelObjectArray[i].rotation));
+                    break;
+            case "DoorExit":
+                    GameObject.Instantiate(Resources.Load("DoorExit"), new Vector3(LevelObjectArray[i].row, LevelObjectArray[i].column, 0), Quaternion.Euler(0, 0, LevelObjectArray[i].rotation));
+                    break;
+            }
+            //GameObject.Instantiate(LevelObjectArray[i].id, new Vector3(LevelObjectArray[i].row, LevelObjectArray[i].column), Quaternion.Euler(LevelObjectArray[i].rotation))
+        }
 	}
 }
 
@@ -159,11 +182,11 @@ public class LevelMetaDataList : LgJsonDictionary, IJsonable
     public GameObject BuildLevellist(string title, string author, string time, string player, string rating)
     {
         GameObject blah = GameObject.Instantiate(Resources.Load("Content") as GameObject);
-        blah.transform.parent = GameObject.Find("Viewport").transform;
+        blah.transform.SetParent(GameObject.Find("Viewport").transform);
         Text showName = blah.gameObject.transform.GetChild(0).gameObject.GetComponent<Text>();
         Text showAuthor = blah.gameObject.transform.GetChild(1).gameObject.GetComponent<Text>();
-        Text showTime = blah.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
-        Text showPlayer = blah.gameObject.transform.GetChild(3).gameObject.GetComponent<Text>();
+        Text showPlayer = blah.gameObject.transform.GetChild(2).gameObject.GetComponent<Text>();
+        Text showTime = blah.gameObject.transform.GetChild(3).gameObject.GetComponent<Text>();
         Text showRating = blah.gameObject.transform.GetChild(4).gameObject.GetComponent<Text>();
 
         showName.text = title;
