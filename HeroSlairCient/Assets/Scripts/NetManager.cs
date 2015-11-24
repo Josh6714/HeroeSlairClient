@@ -59,12 +59,19 @@ public class NetManager : NetworkManager {
         login.password = password.text;
 		msg.message = login.Serialize();
         myClient.Send(MessageType.LOGIN_MSG, msg);
+       
 	}
+
 
     public void AskForLevels(int myId)
     {
         Debug.Log("Asking for level list");
-        var msg = new JsonMessage<LevelMessage>();
+        var msg = new JsonMessage<Request>();
+        Request req = LgJsonNode.Create<Request>();
+        req.request = MessageType.REQUEST_LIST.ToString();
+        msg.message = req.Serialize();
+        myClient.Send(MessageType.REQUEST_LIST, msg);
+       
     }
 
 	void OnClientReceiveMessage<T>(NetworkMessage netMsg) where T : LgJsonDictionary, IJsonable, new()
@@ -89,6 +96,7 @@ public class NetManager : NetworkManager {
         base.OnClientConnect(conn);
         myClient.RegisterHandler(MessageType.LEVEL_MSG, OnClientReceiveMessage<Level>);
         myClient.RegisterHandler(MessageType.ACKNOWLEDGE, OnClientReceiveMessage<Acknowledgement>);
+        myClient.RegisterHandler(MessageType.PLAYER, OnClientReceiveMessage<Player>);
         OnClientSendLogin(0);
         Debug.Log("Connected");
     }
@@ -104,4 +112,6 @@ public class NetManager : NetworkManager {
             Application.LoadLevel(0);
         }
     }
+
+    
 }

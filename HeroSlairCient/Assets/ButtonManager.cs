@@ -18,4 +18,9 @@ public class ButtonManager : MonoBehaviour {
         manager.OnClientDisconnect();
         
     }
+
+    public void OnClickPlay()
+    {
+        manager.AskForLevels(0);
+    }
 }

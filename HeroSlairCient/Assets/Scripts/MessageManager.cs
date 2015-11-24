@@ -13,7 +13,7 @@ public static class MessageType
 
 	// Request for data
 	public static short REQUEST_LIST = 1010; // Request level list
-	public static short REQUEST_LEVEL = 1011; // Request level list
+	public static short REQUEST_LEVEL = 1011; // Request level 
 	public static short REQUEST_ECONOMY = 1012; // Request economy data
 	public static short REQUEST_PLAYER = 1013; // Request player data
 
@@ -92,6 +92,9 @@ public class Request : LgJsonDictionary, IJsonable
 	{
 		Debug.Log("Handling Request");
 		// TODO: put code that does something with this object
+
+
+       
 	}
 }
 
