@@ -13,6 +13,7 @@ public class NetManager : NetworkManager {
     public InputField ipAdress;
     public InputField portNumber;
     public Image ConnectBtn;
+    bool newLogin = false;
 
 	public void Start()
     {
@@ -59,6 +60,13 @@ public class NetManager : NetworkManager {
         StartClient();
         myClient = client;
     }
+
+    public void CreateNewAccount()
+    {
+        newLogin = true;
+        Connect();
+        
+    }
 	public void OnClientSendLogin(int myId)
     {
         
@@ -71,7 +79,7 @@ public class NetManager : NetworkManager {
         login.password = password.text;
 		msg.message = login.Serialize();
 
-        if (ButtonManager.newLogin == false)
+        if (newLogin == false)
         {
             myClient.Send(MessageType.LOGIN_MSG, msg);
         }
@@ -79,7 +87,7 @@ public class NetManager : NetworkManager {
         {
             myClient.Send(MessageType.LOGIN_NEW, msg);
             Debug.Log("new account sent");
-            ButtonManager.newLogin = false;
+            newLogin = false;
         }
        
 	}
