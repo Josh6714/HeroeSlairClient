@@ -115,7 +115,8 @@ public class Acknowledgement : LgJsonDictionary, IJsonable
         else if (ack == MessageValue.FAILURE)
         {
             Debug.Log("Login is no bueno");
-        }
+            GameObject.Find("BadLogin").GetComponent<Text>().text = "Username or password not found";
+       }
 	}
 }
 

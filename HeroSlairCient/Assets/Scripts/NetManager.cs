@@ -12,6 +12,7 @@ public class NetManager : NetworkManager {
     public InputField password;
     public InputField ipAdress;
     public InputField portNumber;
+    public Image ConnectBtn;
 
 	public void Start()
     {
@@ -60,6 +61,7 @@ public class NetManager : NetworkManager {
     }
 	public void OnClientSendLogin(int myId)
     {
+        
 		Debug.Log("Sending Login");
 		var msg = new JsonMessage<Login>();
         Debug.Log("network Address: " + networkAddress + " port: " + networkPort);
@@ -68,7 +70,17 @@ public class NetManager : NetworkManager {
 		login.username = username.text;
         login.password = password.text;
 		msg.message = login.Serialize();
-        myClient.Send(MessageType.LOGIN_MSG, msg);
+
+        if (ButtonManager.newLogin == false)
+        {
+            myClient.Send(MessageType.LOGIN_MSG, msg);
+        }
+        else
+        {
+            myClient.Send(MessageType.LOGIN_NEW, msg);
+            Debug.Log("new account sent");
+            ButtonManager.newLogin = false;
+        }
        
 	}
 
@@ -109,6 +121,12 @@ public class NetManager : NetworkManager {
         myClient.RegisterHandler(MessageType.PLAYER, OnClientReceiveMessage<Player>);
         myClient.RegisterHandler(MessageType.LEVEL_LIST, OnClientReceiveMessage<LevelMetaDataList>);
         myClient.RegisterHandler(MessageType.LEVEL_MSG, OnClientReceiveMessage<Level>);
+        //ipAdress.gameObject.SetActive(false);
+        //portNumber.gameObject.SetActive(false);
+          //GameObject user = Instantiate(password.gameObject);
+        //GameObject pass = Instantiate(username.gameObject);ConnectBtn.gameObject.SetActive(false);
+      
+       
         OnClientSendLogin(0);
         Debug.Log("Connected");
     }
